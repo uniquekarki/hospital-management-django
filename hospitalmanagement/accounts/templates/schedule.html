@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% block content %}
+{% include 'navbar.html' %}
+<div class="global-container">
+	<div class="card login-form"  style="width:40%">
+	<div class="card-body">
+		<h3 class="card-title text-center">Schedule Appointment</h3>
+		<div class="card-text">
+			<!--
+			<div class="alert alert-danger alert-dismissible fade show" role="alert">Incorrect username or password.</div> -->
+			{% if messages %}
+				{% for message in messages %}
+					<div class="alert alert-info">
+						{{ message }}
+					</div>
+				{% endfor %}
+			{% endif %}
+			<form method="post">
+				{% csrf_token %}
+				{{ form.as_p}}				
+
+				<button type="submit" class="btn btn-primary btn-block">Register</button>
+			</form>
+		</div>
+	</div>
+</div>
+</div>
+{% endblock %}

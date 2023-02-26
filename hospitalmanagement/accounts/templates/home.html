@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% block content %}
+{% include 'navbar.html' %}
+
+<div class="global-container">
+	<div class="card login-form">
+	<div class="card-body">
+		<h3 class="card-title text-center">Welcome to Hospital</h3>
+		<div class="card-text">
+			<!--
+			<div class="alert alert-danger alert-dismissible fade show" role="alert">Incorrect username or password.</div> -->
+			<form>
+				<!-- to error: add class "has-danger" -->
+				<div class="form-group text-center">
+					<label for="exampleInputEmail1">Hello {{ request.user.username}}! Welcome.</label>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>
+</div>
+
+
+{% endblock %}

@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% block content %}
+{% include 'navbar.html' %}
+<div class="global-container">
+	<div class="card login-form" style="width:80%">
+	<div class="card-body">
+		<h3 class="card-title text-center">Schedule Appointment</h3>
+		<div class="card-text">
+			<form>
+                <table style="width:100%">
+                    <tr>
+                      <th>Patient Name</th>
+                      <th>Doctor</th>
+                      <th>Appointment Time</th>
+                      <th>Reason</th>
+                    </tr>
+                    {% for x in data %}
+                    <tr>
+                        <th>{{x.patient_name}}</th>
+                        <th>{{x.doctor}}</th>
+                        <th>{{x.appointment_time}}</th>
+                        <th>{{x.reason}}</th>
+                    </tr>
+                    {% endfor %}
+                </table>
+			</form>
+		</div>
+	</div>
+</div>
+</div>
+
+{% endblock %}

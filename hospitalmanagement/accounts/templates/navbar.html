@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="/">Home</a>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+        <li class="nav-item active">
+            <a class="nav-link" href="{% url 'view_appointment' %}">Appointments</a>
+        </li>
+        <li class="nav-item active">
+            <a class="nav-link" href="{% url 'schedule_appointments' %}">Schedule</a>
+        </li>
+        </ul>
+        <form action="{% url 'logout_attempt' %}" class="form-inline my-2 my-lg-0">
+            <button class="btn btn-primary my-2 my-sm-0" type="submit">Logout</button>
+        </form>
+    </div>
+</nav>
+{% endblock %}
