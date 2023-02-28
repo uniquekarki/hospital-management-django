@@ -54,7 +54,6 @@ def login_attempt(request):
     if request.method == 'POST':
         username = request.POST.get('username')
         password = request.POST.get('password')
-        print("\n\n\n\nHERE!!!")
 
         user_obj = User.objects.filter(username = username).first()
         if not user_obj:
@@ -90,6 +89,7 @@ def schedule_appointments(request):
     if form.is_valid():
         form.save()
         messages.success(request,'Your appointment has been scheduled!')
+        send_appointment_email(form.cleaned_data)
         return redirect('/schedule')
 
     context = {
@@ -128,4 +128,32 @@ def send_verification_email(email, token):
     message = f'Paste this link to verify your account http://127.0.0.1:8000/verify/{token}'
     email_from = settings.EMAIL_HOST_USER
     recipient_list = [email]
+    send_mail(subject, message, email_from, recipient_list)
+
+def delete_appointment(request,id):
+    data = Appointments.objects.filter(id=id)
+    if request.method == "POST":
+        data.delete()
+        return redirect('/appointment')
+    return render(request, 'delete.html')
+
+def update_appointment(request,id):
+    data = Appointments.objects.filter(id=id).first()
+    form = AppointmentsForm(request.POST or None, instance=data)
+    if form.is_valid():
+        form.save()
+        messages.success(request,'Your appointment has been updated!')
+        send_appointment_email(form.cleaned_data)
+        return redirect('/schedule')
+
+    context = {
+        'form':form
+    }
+    return render(request, 'schedule.html', context)
+
+def send_appointment_email(kwargs):
+    subject = 'Your appointment has been set'
+    message = f'Your appointment for {kwargs["patient_name"]} has been scheduled for {kwargs["appointment_time"]}'
+    email_from = settings.EMAIL_HOST_USER
+    recipient_list = [kwargs["patient_email"]]
     send_mail(subject, message, email_from, recipient_list)

@@ -20,6 +20,8 @@
                         <th>{{x.doctor}}</th>
                         <th>{{x.appointment_time}}</th>
                         <th>{{x.reason}}</th>
+                        {% load static %}
+                        <th><a class="btn btn-primary" href="/delete/{{x.id}}">Delete</a>  <a class="btn btn-primary" href="/update/{{x.id}}">Update</a></th>
                     </tr>
                     {% endfor %}
                 </table>

@@ -13,4 +13,7 @@ urlpatterns = [
     path('logout', logout_attempt, name="logout_attempt"),
     path('schedule', schedule_appointments, name="schedule_appointments"),
     path('appointment', view_appointment, name='view_appointment'),
+    path('delete/<id>', delete_appointment, name='delete_appointment'),
+    path('update/<id>', update_appointment, name='update_appointment'),
+
 ]
